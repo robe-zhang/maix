@@ -1,0 +1,5 @@
+#!/bin/bash
+
+pwd_path=$(pwd)
+
+sudo ${pwd_path}/maixpy-ide/bin/maixpyide

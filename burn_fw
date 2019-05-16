@@ -1,0 +1,40 @@
+#!/bin/bash
+
+path_dir=$(pwd)
+board=
+device=
+
+kflash=${path_dir}/kflash.py/kflash.py
+speed=2000000
+
+fw=
+
+if [[ $1 == "go" ]] ;then
+board=goE
+device=/dev/ttyUSB1
+fi
+
+if [[ $1 == "bit" ]] ;then
+board=dan
+device=/dev/ttyUSB0
+fi
+
+if [[ $2 == "full" ]] ;then
+fw=${path_dir}/firmware/maixpy_v0.3.1_full.bin;
+fi
+
+if [[ $2 == "mini" ]] ;then
+fw=${path_dir}/firmware/maixpy_v0.3.1_minimum.bin;
+fi
+
+if [[ $2 == "no" ]] ;then
+fw=${path_dir}/firmware/maixpy_v0.3.1_no_lvgl.bin;
+fi
+
+if [[ $2 == "face" ]] ;then
+fw=${path_dir}/firmware/face_model_at_0x300000.kfpkg;
+fi
+
+sudo python3 ${kflash} -p ${device} -b ${speed} -B ${board} ${fw}
+
+
